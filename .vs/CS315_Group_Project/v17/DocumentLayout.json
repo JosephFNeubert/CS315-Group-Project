@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\joeyf\\OneDrive - On Communication Consulting\\Desktop\\Programming\\GitHub\\CS-315\\CS-315_Group_Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D97E799B-2579-47F6-AF22-ACE4A643D2DD}|CS315_Group_Project\\CS315_Group_Project.vcxproj|C:\\Users\\joeyf\\OneDrive - On Communication Consulting\\Desktop\\Programming\\GitHub\\CS-315\\CS-315_Group_Project\\CS315_Group_Project\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{D97E799B-2579-47F6-AF22-ACE4A643D2DD}|CS315_Group_Project\\CS315_Group_Project.vcxproj|solutionrelative:CS315_Group_Project\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{D97E799B-2579-47F6-AF22-ACE4A643D2DD}|CS315_Group_Project\\CS315_Group_Project.vcxproj|C:\\Users\\joeyf\\OneDrive - On Communication Consulting\\Desktop\\Programming\\GitHub\\CS-315\\CS-315_Group_Project\\CS315_Group_Project\\mazeTreeSolver.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D97E799B-2579-47F6-AF22-ACE4A643D2DD}|CS315_Group_Project\\CS315_Group_Project.vcxproj|solutionrelative:CS315_Group_Project\\mazeTreeSolver.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,12 +19,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "main.c",
-              "DocumentMoniker": "C:\\Users\\joeyf\\OneDrive - On Communication Consulting\\Desktop\\Programming\\GitHub\\CS-315\\CS-315_Group_Project\\CS315_Group_Project\\main.c",
-              "RelativeDocumentMoniker": "CS315_Group_Project\\main.c",
-              "ToolTip": "C:\\Users\\joeyf\\OneDrive - On Communication Consulting\\Desktop\\Programming\\GitHub\\CS-315\\CS-315_Group_Project\\CS315_Group_Project\\main.c",
-              "RelativeToolTip": "CS315_Group_Project\\main.c",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Title": "mazeTreeSolver.c",
+              "DocumentMoniker": "C:\\Users\\joeyf\\OneDrive - On Communication Consulting\\Desktop\\Programming\\GitHub\\CS-315\\CS-315_Group_Project\\CS315_Group_Project\\mazeTreeSolver.c",
+              "RelativeDocumentMoniker": "CS315_Group_Project\\mazeTreeSolver.c",
+              "ToolTip": "C:\\Users\\joeyf\\OneDrive - On Communication Consulting\\Desktop\\Programming\\GitHub\\CS-315\\CS-315_Group_Project\\CS315_Group_Project\\mazeTreeSolver.c",
+              "RelativeToolTip": "CS315_Group_Project\\mazeTreeSolver.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-10-30T02:49:22.759Z",
               "EditorCaption": ""
