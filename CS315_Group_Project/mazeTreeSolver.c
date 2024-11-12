@@ -9,21 +9,22 @@
 // Import libraries
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
+#define MAZESZ 20
 
 // Declaration of Maze Tree structure
-struct mazeTree {
-	struct mazeTree* left;
-	struct mazeTree* center;
-	struct mazeTree* right;
+typedef struct{
+	struct *mazeTree links[4];
 	int location[2];
-};
+} mazeTree;
 
 // Function prototypes
-char* readInMaze();
-struct mazeTree* convertMazeInTree(char* maze);
-struct mazeTree* runDijkstra(struct mazeTree* tree);
-void displayMazeSolution(char* maze, struct mazeTree* optimalTree);
-int getMazeSolutionSteps(struct mazeTree* optimalTree);
+void readInMaze(char* fileName, char maze[MAZESZ][MAZESZ]);
+mazeTree* convertMaze2Tree(char maze[MAZESZ][MAZESZ]);
+mazeTree* runDijkstra(mazeTree* tree);
+void displayMazeSolution(char* maze,  mazeTree* optimalTree);
+int getMazeSolutionSteps(mazeTree* optimalTree);
 
 // Main
 int main() {
@@ -32,25 +33,53 @@ int main() {
 }
 
 // All function implementations
-char* readInMaze() 
-{
+void readInMaze(char* fileName, char maze[MAZESZ][MAZESZ]) 
+{   
+    
 	//TODO - Joe
+    FILE* fp = fopen(fileName,"r");
+    for(int i = 0; i < MAZESZ; i++){
+        fgets(maze[i], MAZESZ, fp);
+    }
+    fclose(fp);
 }
 
-struct mazeTree* convertMazeInTree(char* maze)
+mazeTree* convertMaze2Tree(const char maze[MAZESZ][MAZESZ])
+{
+    mazeTree* locs[MAZESZ][MAZESZ];
+    int con = 0;
+    for(int i = 0; i < MAZESZ; i++){
+        for(int j = 0; j < MAZESZ; j++){
+            locs[i][j] = NULL;
+            if(maze[i][j] == ' '){
+                locs[i][j] = (mazeTree*)malloc(sizeof(mazeTree));
+                locs[i][j]->location[0] = i;
+                locs[i][j]->location[1] = j;
+            }
+        }
+    }
+
+    for(int i = 0; i < MAZESZ; i++){
+        for(int j = 0; j < MAZESZ; j++){
+            if()
+
+            }
+        }
+
+
+}
+
+
+
+mazeTree* runDijkstra(mazeTree* tree) 
 {
 	//TODO - Sawyer
 }
-
-struct mazeTree* runDijkstra(struct mazeTree* tree) 
-{
-	//TODO - Sawyer
-}
-
-void displayMazeSolution(char* maze, struct mazeTree* optimalTree) 	//TODO - Kaden
+/*
+void displayMazeSolution(char* maze,  mazeTree* optimalTree) 	//TODO - Kaden
 {
 	printf("Here is the solved Maze: \n");
-	struct mazeTree* currentNode =optimalTree;
+	mazeTree* currentNode =optimalTree;
 	while (current != NULL) {
         //track location of maze
         if(currentNode -> left){    //if moved left
@@ -66,7 +95,7 @@ void displayMazeSolution(char* maze, struct mazeTree* optimalTree) 	//TODO - Kad
 
 }
 
-int getMazeSolutionSteps(struct mazeTree* optimalTree)  	//TODO - Kaden
+int getMazeSolutionSteps(mazeTree* optimalTree)  	//TODO - Kaden
 {
     int step=0;
     struct mazeTree* currentNode = optimalTree;
@@ -87,3 +116,4 @@ int getMazeSolutionSteps(struct mazeTree* optimalTree)  	//TODO - Kaden
     return step;
 	printf("%d\n", step);
 }
+*/
