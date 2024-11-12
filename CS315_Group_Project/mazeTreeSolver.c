@@ -49,7 +49,6 @@ struct mazeTree* runDijkstra(struct mazeTree* tree)
 
 void displayMazeSolution(char* maze, struct mazeTree* optimalTree){ 	//TODO - Kaden
 	
-    int mazeSize
     printf("Here is the solved Maze: \n");
 	struct mazeTree* currentNode =optimalTree;
 	while (current != NULL) {   
