@@ -47,11 +47,18 @@ struct mazeTree* runDijkstra(struct mazeTree* tree)
 	//TODO - Sawyer
 }
 
-void displayMazeSolution(char* maze, struct mazeTree* optimalTree) 	//TODO - Kaden
-{
-	printf("Here is the solved Maze: \n");
+void displayMazeSolution(char* maze, struct mazeTree* optimalTree){ 	//TODO - Kaden
+	
+    int mazeSize
+    printf("Here is the solved Maze: \n");
 	struct mazeTree* currentNode =optimalTree;
-	while (current != NULL) {
+	while (current != NULL) {   
+
+        // marks the location in the maze with *
+        int row = current->location[0];
+        int col = current->location[1];
+        maze[row * (int)sqrt(strlen(maze)) + col] = '*';
+
         //track location of maze
         if(currentNode -> left){    //if moved left
             currentNode= currentNode->left;
@@ -61,6 +68,15 @@ void displayMazeSolution(char* maze, struct mazeTree* optimalTree) 	//TODO - Kad
         }
         else if (currentNode -> right){    //if right
             currentNode = currentNode -> right;
+        }
+    }
+
+    //printing the completed maze
+        int mazeSize = (int)sqrt(strlen(maze));
+        for (int x = 0; x < strlen(maze); x++) {
+        printf("%c", maze[x]);   //print line of maze
+        if ((x+1) % mazeSize == 0) {  // newline for each row
+            printf("\n"); //prints new line
         }
     }
 
