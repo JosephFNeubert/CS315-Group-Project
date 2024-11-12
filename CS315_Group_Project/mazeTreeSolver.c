@@ -50,8 +50,19 @@ struct mazeTree* runDijkstra(struct mazeTree* tree)
 void displayMazeSolution(char* maze, struct mazeTree* optimalTree) 	//TODO - Kaden
 {
 	printf("Here is the solved Maze: \n");
-    struct mazeTree* currentNode =optimalTree;
-	
+	struct mazeTree* currentNode =optimalTree;
+	while (current != NULL) {
+        //track location of maze
+        if(currentNode -> left){    //if moved left
+            currentNode= currentNode->left;
+        }
+        else if (currentNode -> center){  //if straight instead
+            currentNode -> currentNode ->center;
+        }
+        else if (currentNode -> right){    //if right
+            currentNode = currentNode -> right;
+        }
+    }
 
 }
 
