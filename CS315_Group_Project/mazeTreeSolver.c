@@ -47,12 +47,32 @@ struct mazeTree* runDijkstra(struct mazeTree* tree)
 	//TODO - Sawyer
 }
 
-void displayMazeSolution(char* maze, struct mazeTree* optimalTree) 
+void displayMazeSolution(char* maze, struct mazeTree* optimalTree) 	//TODO - Kaden
 {
-	//TODO - Kaden
+	printf("Here is the solved Maze: \n");
+    struct mazeTree* currentNode =optimalTree;
+	
+
 }
 
-int getMazeSolutionSteps(struct mazeTree* optimalTree) 
+int getMazeSolutionSteps(struct mazeTree* optimalTree)  	//TODO - Kaden
 {
-	//TODO - Kaden
+    int step=0;
+    struct mazeTree* currentNode = optimalTree;
+    
+    while (currentNode != NULL){ //while nothing is in currentNode
+        step++;  //add each step to counter
+        
+        if(currentNode -> left){    //if moved left
+            currentNode= currentNode->left;
+        }
+        else if (currentNode -> center){  //if moved straight
+            currentNode = currentNode -> center;
+        }
+        else if (currentNode -> right){   //if moved right
+            currentNode = currentNode -> right;
+        }
+    }
+    return step;
+	printf("%d\n", step);
 }
