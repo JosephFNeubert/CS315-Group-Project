@@ -11,8 +11,10 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define MAZESZ 20
-#define DIRCHR "URDL"
+#define MAZESZ 61
+#define DIRCHR "ULDR"
+#define PATCHR "^<v>!"
+#define FANCYDISP 1
 
 // Declaration of Maze Tree structure
 typedef struct mazeTree{
@@ -29,24 +31,26 @@ void displayMazeSolution(char* maze,  mazeTree* optimalTree);
 int getMazeSolutionSteps(mazeTree* optimalTree);
 void freeMaze(mazeTree* root);
 void printsln(mazeTree* root);
+void dispMaze(mazeStr maze);
+void sln2Maze(mazeTree* sln, mazeStr maze);
 
 // Main
 int main() {
 	// TODO - Joe
     mazeStr mazeS;
-    printf("yeah\n");
     readInMaze("maze",mazeS);
-    printf("read in \n\n");
+    printf("Maze read:\n");
+    dispMaze(mazeS);
     mazeTree *maze = convertMaze2Tree(mazeS);
-
-    printf("converted \n\n");
-    printf("%p:(%d,%d)\n",maze,maze->location[0],maze->location[1]);
+    //printf("%p:(%d,%d)\n",maze,maze->location[0],maze->location[1]);
     mazeTree *sln = dfSearch(maze);
     printf("solution found:\n");
+    //printf("%p\n",sln);
     printsln(sln);
-    printf("%p:(%d,%d)\n",sln,sln->location[0],sln->location[1]);
-    freeMaze(maze);
-    freeMaze(sln);
+    sln2Maze(sln,mazeS);
+    dispMaze(mazeS);
+    //freeMaze(maze);
+    //freeMaze(sln);
 
 	return 0;
 }
@@ -93,13 +97,13 @@ mazeTree* convertMaze2Tree(const mazeStr maze)
                 if(i > 0 && locs[i-1][j] != NULL){
                     locs[i][j]->links[0] = locs[i - 1][j];
                 }
-                if(j > 0 && locs[i-1][j] != NULL){
+                if(j > 0 && locs[i][j - 1] != NULL){
                     locs[i][j]->links[1] = locs[i][j - 1];
                 }
-                if(i < MAZESZ - 1 && locs[i-1][j] != NULL){
+                if(i < MAZESZ - 1 && locs[i + 1][j] != NULL){
                     locs[i][j]->links[2] = locs[i + 1][j];
                 }
-                if(j < MAZESZ - 1 && locs[i-1][j] != NULL){
+                if(j < MAZESZ - 1 && locs[i][j + 1] != NULL){
                     locs[i][j]->links[3] = locs[i][j + 1];
                 }
             }
@@ -115,8 +119,7 @@ mazeTree* convertMaze2Tree(const mazeStr maze)
 
 }
 
-mazeTree* dfSearch(mazeTree* tree) 
-{
+mazeTree* dfSearch(mazeTree* tree) {
     
 	mazeTree* sln = NULL;
     if(tree == NULL)
@@ -128,21 +131,27 @@ mazeTree* dfSearch(mazeTree* tree)
             sln->links[q] = NULL;
         sln->location[0] = tree->location[0];
         sln->location[1] = tree->location[1];
+        sln->vFlag = 4;
+        //printf("@edge:(%d,%d)\n",sln->location[0],sln->location[1]);
         return sln;
     }
     tree->vFlag++;
     for(int i = 0; i < 4; i++){
+        //printf("%p:%c\n",tree->links[i],DIRCHR[i]);
+        sln = (mazeTree*)malloc(sizeof(mazeTree));
         if(tree->links[i] != NULL && tree->links[i]->vFlag == 0){
-            printf("%c:%p (%d,%d)\n",DIRCHR[i],tree->links[i],tree->location[0],tree->location[1]);
-            sln = (mazeTree*)malloc(sizeof(mazeTree));
+            //printf("%c:(%d,%d)\n",DIRCHR[i],tree->location[0],tree->location[1]);
             for(int q = 0; q < 4; q++)
                 sln->links[q] = NULL;
             sln->links[i] = dfSearch(tree->links[i]);
             sln->location[0] = tree->location[0];
             sln->location[1] = tree->location[1];
-            if(sln != NULL){
+            if(sln->links[i] != NULL){
+                sln->vFlag = i;
+                //printf("TRACEBACK:(%d,%d),L:%p\n",sln->location[0],sln->location[1],sln->links[i]);
                 return sln;
             }
+        free(sln);
         }
     }
     return NULL;
@@ -150,24 +159,17 @@ mazeTree* dfSearch(mazeTree* tree)
 }
 
 void printsln(mazeTree* root){
-    printf("a\n");
-    printf("%p\n",root);
-    //while(root != NULL){
-        mazeTree* tmp = NULL;
-        for(int i = 0; i < 4; i++){
-            printf("what!\n");
-            if(root->links[i] != NULL){
-                printf("what!\n");
-                printf("%c",DIRCHR[i]);
-                tmp = root->links[i];
-                break;
-            }
-            root = tmp;
-        }
-    //}
+    if(root == NULL)
+        printf("NO SOLUTION");
+    //printf("a\n");
+    //printf("%p\n",root);
+    int i = 0;
+    while(root != NULL && root->vFlag < 4){
+        printf("%c",DIRCHR[root->vFlag]);
+        root = root->links[root->vFlag];
+    }
     printf("\n");
 }
-
 void freeMaze(mazeTree* root){
     for(int i = 0; i < 4; i++){
         if(root->links[i] != 0){
@@ -177,8 +179,38 @@ void freeMaze(mazeTree* root){
     free(root);
 }
 
+void dispMaze(mazeStr maze){
+    for(int i = 0; i < MAZESZ; i++){
+        for(int j = 0; j < MAZESZ; j++){
+            if(FANCYDISP){
+                if(maze[i][j] == ' '){
+                    printf("\033[0m");
+                }else if('A' <= maze[i][j] && maze[i][j] <= 'Z'){
+                    printf("\033[47m");
+                }else{
+                    printf("\033[42m");
+                }
+            }
+            printf("%c",maze[i][j]);
+        }
+        if(FANCYDISP)
+            printf("\033[0m");
+        printf("\n");
+    }
+}
 
-
+void sln2Maze(mazeTree* sln, mazeStr maze){
+    if(sln == NULL)
+        return;
+    //printf("a\n");
+    //printf("%p\n",root);
+    int i = 0;
+    while(sln->vFlag < 4){
+        maze[sln->location[0]][sln->location[1]] = PATCHR[sln->vFlag];
+        sln = sln->links[sln->vFlag];
+    }
+    maze[sln->location[0]][sln->location[1]] = PATCHR[sln->vFlag];
+}
 /*
 void displayMazeSolution(char* maze, struct mazeTree* optimalTree){ 	//TODO - Kaden
 	
