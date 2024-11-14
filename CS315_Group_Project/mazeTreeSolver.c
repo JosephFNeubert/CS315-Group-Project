@@ -12,6 +12,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+// Definitions
 #define MAZESZ 61
 #define DIRCHR "ULDR"
 #define PATCHR "^<v>!"
@@ -23,44 +24,40 @@ typedef struct mazeTree{
 	int location[2];
     int vFlag;
 } mazeTree;
+
+// Declaration of Maze String
 typedef char mazeStr[MAZESZ][MAZESZ];
+
 // Function prototypes
 void readInMaze(char* fileName, mazeStr maze);
 mazeTree* convertMaze2Tree(const mazeStr);
 mazeTree* dfSearch(mazeTree* tree);
-void displayMazeSolution(char* maze,  mazeTree* optimalTree);
-int getMazeSolutionSteps(mazeTree* optimalTree);
 void freeMaze(mazeTree* root);
 void printsln(mazeTree* root);
-void dispMaze(mazeStr maze);
 void sln2Maze(mazeTree* sln, mazeStr maze);
+void dispMaze(mazeStr maze);
 
 // Main
 int main() {
-	// TODO - Joe
     mazeStr mazeS;
     readInMaze("maze",mazeS);
     printf("Maze read:\n");
     dispMaze(mazeS);
     mazeTree *maze = convertMaze2Tree(mazeS);
-    //printf("%p:(%d,%d)\n",maze,maze->location[0],maze->location[1]);
     mazeTree *sln = dfSearch(maze);
     printf("solution found:\n");
-    //printf("%p\n",sln);
     printsln(sln);
     sln2Maze(sln,mazeS);
     dispMaze(mazeS);
-    //freeMaze(maze);
-    //freeMaze(sln);
 
 	return 0;
 }
 
-// All function implementations
+// ALL FUNCTION IMPLEMENTATIONS
+
+// Read in maze to a maze string from a text file
 void readInMaze(char* fileName, mazeStr maze) 
-{   
-    
-	//TODO - Joe (not anymore lol)
+{
     FILE* fp = fopen(fileName,"r");
     if(fp == NULL)
         return;
@@ -70,11 +67,11 @@ void readInMaze(char* fileName, mazeStr maze)
             if(maze[i][j] == '\n')
                 j--;
         }
-
     }
     fclose(fp);
 }
 
+// Convert the maze string into a tree
 mazeTree* convertMaze2Tree(const mazeStr maze)
 {
     mazeTree* locs[MAZESZ][MAZESZ];
@@ -115,11 +112,10 @@ mazeTree* convertMaze2Tree(const mazeStr maze)
             if(locs[0][i] != NULL)
                 return locs[0][i];
         }
-        return NULL; // uh oh!
-
-
+        return NULL;
 }
 
+// Depth-first search of the maze tree
 mazeTree* dfSearch(mazeTree* tree) {
     
 	mazeTree* sln = NULL;
@@ -133,15 +129,12 @@ mazeTree* dfSearch(mazeTree* tree) {
         sln->location[0] = tree->location[0];
         sln->location[1] = tree->location[1];
         sln->vFlag = 4;
-        //printf("@edge:(%d,%d)\n",sln->location[0],sln->location[1]);
         return sln;
     }
     tree->vFlag++;
     for(int i = 0; i < 4; i++){
-        //printf("%p:%c\n",tree->links[i],DIRCHR[i]);
         sln = (mazeTree*)malloc(sizeof(mazeTree));
         if(tree->links[i] != NULL && tree->links[i]->vFlag == 0){
-            //printf("%c:(%d,%d)\n",DIRCHR[i],tree->location[0],tree->location[1]);
             for(int q = 0; q < 4; q++)
                 sln->links[q] = NULL;
             sln->links[i] = dfSearch(tree->links[i]);
@@ -149,17 +142,16 @@ mazeTree* dfSearch(mazeTree* tree) {
             sln->location[1] = tree->location[1];
             if(sln->links[i] != NULL){
                 sln->vFlag = i;
-                //printf("TRACEBACK:(%d,%d),L:%p\n",sln->location[0],sln->location[1],sln->links[i]);
                 return sln;
             }
         free(sln);
         }
     }
     return NULL;
-
 }
 
-void printsln(mazeTree* root){
+// Prints the letters denoting the directions taken to solve the maze
+void printsln(mazeTree* root) {
     if(root == NULL)
         printf("NO SOLUTION");
     //printf("a\n");
@@ -171,6 +163,8 @@ void printsln(mazeTree* root){
     }
     printf("\n");
 }
+
+// Free the allocated data for maze
 void freeMaze(mazeTree* root){
     for(int i = 0; i < 4; i++){
         if(root->links[i] != 0){
@@ -180,6 +174,21 @@ void freeMaze(mazeTree* root){
     free(root);
 }
 
+// Convert the maze solution into a graphical representation
+void sln2Maze(mazeTree* sln, mazeStr maze) {
+    if (sln == NULL)
+        return;
+    //printf("a\n");
+    //printf("%p\n",root);
+    int i = 0;
+    while (sln->vFlag < 4) {
+        maze[sln->location[0]][sln->location[1]] = PATCHR[sln->vFlag];
+        sln = sln->links[sln->vFlag];
+    }
+    maze[sln->location[0]][sln->location[1]] = PATCHR[sln->vFlag];
+}
+
+// Display the graphical maze solution determined by sln2Maze
 void dispMaze(mazeStr maze){
     for(int i = 0; i < MAZESZ; i++){
         for(int j = 0; j < MAZESZ; j++){
@@ -199,73 +208,3 @@ void dispMaze(mazeStr maze){
         printf("\n");
     }
 }
-
-void sln2Maze(mazeTree* sln, mazeStr maze){
-    if(sln == NULL)
-        return;
-    //printf("a\n");
-    //printf("%p\n",root);
-    int i = 0;
-    while(sln->vFlag < 4){
-        maze[sln->location[0]][sln->location[1]] = PATCHR[sln->vFlag];
-        sln = sln->links[sln->vFlag];
-    }
-    maze[sln->location[0]][sln->location[1]] = PATCHR[sln->vFlag];
-}
-/*
-void displayMazeSolution(char* maze, struct mazeTree* optimalTree){ 	//TODO - Kaden
-	
-    printf("Here is the solved Maze: \n");
-	struct mazeTree* currentNode =optimalTree;
-	while (current != NULL) {   
-
-        // marks the location in the maze with *
-        int row = current->location[0];
-        int col = current->location[1];
-        maze[row * (int)sqrt(strlen(maze)) + col] = '*';
-
-        //track location of maze
-        if(currentNode -> left){    //if moved left
-            currentNode= currentNode->left;
-        }
-        else if (currentNode -> center){  //if straight instead
-            currentNode -> currentNode ->center;
-        }
-        else if (currentNode -> right){    //if right
-            currentNode = currentNode -> right;
-        }
-    }
-
-    //printing the completed maze
-        int mazeSize = (int)sqrt(strlen(maze));
-        for (int x = 0; x < strlen(maze); x++) {
-        printf("%c", maze[x]);   //print line of maze
-        if ((x+1) % mazeSize == 0) {  // newline for each row
-            printf("\n"); //prints new line
-        }
-    }
-
-}
-
-int getMazeSolutionSteps(mazeTree* optimalTree)  	//TODO - Kaden
-{
-    int step=0;
-    struct mazeTree* currentNode = optimalTree;
-    
-    while (currentNode != NULL){ //while nothing is in currentNode
-        step++;  //add each step to counter
-        
-        if(currentNode -> left){    //if moved left
-            currentNode= currentNode->left;
-        }
-        else if (currentNode -> center){  //if moved straight
-            currentNode = currentNode -> center;
-        }
-        else if (currentNode -> right){   //if moved right
-            currentNode = currentNode -> right;
-        }
-    }
-    return step;
-	printf("%d\n", step);
-}
-*/
