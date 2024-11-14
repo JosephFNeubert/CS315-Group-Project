@@ -165,6 +165,7 @@ void printsln(mazeTree* root) {
 }
 
 // Free the allocated data for maze
+// Does not currently work, trys to double free entries due to bidirectionality
 void freeMaze(mazeTree* root){
     for(int i = 0; i < 4; i++){
         if(root->links[i] != 0){
