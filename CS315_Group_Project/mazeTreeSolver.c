@@ -1,8 +1,9 @@
 /****************************************************************************
 * File:     mazeTreeSolver.c
 * Author:   Sawyer Curless, Kaden Hayrynen, Joseph Neubert
-* Purpose:  Maze solver (TODO)
-* Version:  1.0 - Oct. 30, 2024
+* Purpose:  Program that reads in a text file of a maze structure, converts it into a tree, performs depth-first search,
+*           then outputs the maze's solution.
+* Version:  1.0 - Nov 14, 2024
 * Resources: N/A
 *******************************************************************************/
 
