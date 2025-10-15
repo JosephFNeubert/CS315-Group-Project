@@ -98,7 +98,7 @@ struct mazeTree* convertMazeInTree(char* maze)
     for(int i = 0; i < MAZESZ; i++){
         for(int j = 0; j < MAZESZ; j++){
             maze[i][j] = fgetc(fp);
-            if(maze[i][j] == '\n')
+            if(maze[i][j] == '\n' || maze[i][j] == '\r')
                 j--;
         }
     }
