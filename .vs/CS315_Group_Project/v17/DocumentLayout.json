@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{D97E799B-2579-47F6-AF22-ACE4A643D2DD}|CS315_Group_Project\\CS315_Group_Project.vcxproj|C:\\Users\\joeyf\\OneDrive - On Communication Consulting\\Desktop\\Programming\\GitHub\\CS-315\\CS-315_Group_Project\\CS315_Group_Project\\mazeTreeSolver.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{D97E799B-2579-47F6-AF22-ACE4A643D2DD}|CS315_Group_Project\\CS315_Group_Project.vcxproj|solutionrelative:CS315_Group_Project\\mazeTreeSolver.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D97E799B-2579-47F6-AF22-ACE4A643D2DD}|CS315_Group_Project\\CS315_Group_Project.vcxproj|C:\\Users\\joeyf\\OneDrive - On Communication Consulting\\Desktop\\Programming\\GitHub\\CS-315\\CS-315_Group_Project\\CS315_Group_Project\\text.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{D97E799B-2579-47F6-AF22-ACE4A643D2DD}|CS315_Group_Project\\CS315_Group_Project.vcxproj|solutionrelative:CS315_Group_Project\\text.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "text.txt",
+              "DocumentMoniker": "C:\\Users\\joeyf\\OneDrive - On Communication Consulting\\Desktop\\Programming\\GitHub\\CS-315\\CS-315_Group_Project\\CS315_Group_Project\\text.txt",
+              "RelativeDocumentMoniker": "CS315_Group_Project\\text.txt",
+              "ToolTip": "C:\\Users\\joeyf\\OneDrive - On Communication Consulting\\Desktop\\Programming\\GitHub\\CS-315\\CS-315_Group_Project\\CS315_Group_Project\\text.txt",
+              "RelativeToolTip": "CS315_Group_Project\\text.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-11-12T19:50:24.797Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +41,11 @@
               "RelativeDocumentMoniker": "CS315_Group_Project\\mazeTreeSolver.c",
               "ToolTip": "C:\\Users\\joeyf\\OneDrive - On Communication Consulting\\Desktop\\Programming\\GitHub\\CS-315\\CS-315_Group_Project\\CS315_Group_Project\\mazeTreeSolver.c",
               "RelativeToolTip": "CS315_Group_Project\\mazeTreeSolver.c",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAAANIAAAAAAAAAAAAAAA==",
+<<<<<<< Updated upstream
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMYAAAAsAAAAAAAAAA==",
+=======
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAACkAAAAzAAAAAAAAAA==",
+>>>>>>> Stashed changes
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-11-14T01:59:52.386Z",
               "EditorCaption": ""

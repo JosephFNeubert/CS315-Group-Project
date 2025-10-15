@@ -10,6 +10,7 @@
 // Import libraries
 #include <stdio.h>
 #include <string.h>
+<<<<<<< Updated upstream
 #include <stdlib.h>
 
 // Definitions
@@ -17,6 +18,9 @@
 #define DIRCHR "ULDR"
 #define PATCHR "^<v>!"
 #define FANCYDISP 1
+=======
+#define MAZELEN 1000;
+>>>>>>> Stashed changes
 
 // Declaration of Maze Tree structure
 typedef struct mazeTree{
@@ -29,6 +33,7 @@ typedef struct mazeTree{
 typedef char mazeStr[MAZESZ][MAZESZ];
 
 // Function prototypes
+<<<<<<< Updated upstream
 void readInMaze(char* fileName, mazeStr maze);
 mazeTree* convertMaze2Tree(const mazeStr);
 mazeTree* dfSearch(mazeTree* tree);
@@ -57,6 +62,35 @@ int main() {
 
 // Read in maze to a maze string from a text file
 void readInMaze(char* fileName, mazeStr maze) 
+=======
+char* readInMaze(char* fileName);
+struct mazeTree* convertMazeInTree(char* maze);
+struct mazeTree* runDijkstra(struct mazeTree* tree);
+void displayMazeSolution(char* maze, struct mazeTree* optimalTree);
+int getMazeSolutionSteps(struct mazeTree* optimalTree);
+
+// Main
+int main() { // TODO - Joe
+    char* text = readInMaze("text.txt");
+    if (text != NULL) {
+        printf("%s", text);
+    }
+
+    return 0;
+}
+
+// All function implementations
+char* readInMaze(char* fileName) 
+{
+    char* mazeText = malloc(sizeof(char) * MAZELEN);
+    FILE* file = fopen(fileName, "r");
+
+    fscanf_s(file, "%s", mazeText);
+    return mazeText;
+}
+/*
+struct mazeTree* convertMazeInTree(char* maze)
+>>>>>>> Stashed changes
 {
     FILE* fp = fopen(fileName,"r");
     if(fp == NULL)
@@ -209,3 +243,4 @@ void dispMaze(mazeStr maze){
         printf("\n");
     }
 }
+*/
